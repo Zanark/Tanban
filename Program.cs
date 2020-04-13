@@ -1,12 +1,18 @@
 ﻿using System;
+using Helper;
+using System.Threading.Tasks;
 
 namespace Tanban
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+        
+            APIHelper apihelper = new APIHelper();
+            await apihelper.RequestGitHub("placeholder");
+
+
         }
     }
 }
