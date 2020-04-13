@@ -10,7 +10,7 @@ namespace Tanban
         {
         
             APIHelper apihelper = new APIHelper();
-            await apihelper.RequestGitHub("placeholder");
+            await apihelper.request_GitHub("placeholder");
 
 
         }

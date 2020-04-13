@@ -1,8 +1,12 @@
 using System;
+using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using DotNetEnv;
 
 namespace Helper
 {
@@ -13,14 +17,27 @@ namespace Helper
         
         public APIHelper()
         {
-             Console.WriteLine("APIHelper Object successfully created\n");
-             client.BaseAddress = new Uri("https://api.github.com");
-             client.DefaultRequestHeaders.Add("User-Agent", "C# console program");
+            client.BaseAddress = new Uri("https://api.github.com");
+            client.DefaultRequestHeaders.Add("User-Agent", "Tanban");
+            client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/vnd.github.inertia-preview+json"));
+
+            DotNetEnv.Env.Load();
+            var authToken = Encoding.ASCII.GetBytes(DotNetEnv.Env.GetString("GITHUB_TOKEN", "Variable not found"));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
+                    Convert.ToBase64String(authToken));
         }
-        public async Task RequestGitHub(string url)
+
+        private async Task list_headers(string url)
+        {
+            var result = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, url));
+
+            Console.WriteLine(result + "\n\n");
+        }
+        public async Task request_GitHub(string url)
         {            
-            url = "repos/Zanark/Tanban/contributors";
-            
+            url = "/repos/Zanark/HackCal/projects";            
+          
             try	
             {
                 HttpResponseMessage response = await client.GetAsync(url);
