@@ -1,6 +1,6 @@
 using System;
 
-namespace Helper
+namespace DataClass
 {
     class Project
     {
