@@ -1,15 +1,29 @@
+using DataClass;
 using System;
+using System.Collections.Generic;
 
 namespace Helper
 {
     class ConsoleUI
     {
-        private string seperator = "\n============================";
-        
-        public ConsoleUI(Project project)
+        public ConsoleUI()
         {
-            Console.WriteLine(project.name + seperator);
-            Console.WriteLine(project.body + seperator);
+            //TODO: Startup Code here
         }
+
+        public void ListRepositories(string user)
+        {
+            
+        }
+        public void ListProjects(Repository repository)
+        {
+
+        }
+
+        public void DisplayProject(Project project)
+        {
+
+        }
+
     }
 }

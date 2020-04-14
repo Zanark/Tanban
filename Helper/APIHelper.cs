@@ -1,3 +1,4 @@
+using DataClass;
 using System;
 using System.Text;
 using System.Net.Http;
@@ -19,6 +20,7 @@ namespace Helper
 
         public APIHelper()
         {
+            //TODO: Generate auth token using a authenticator class
             client.BaseAddress = new Uri("https://api.github.com");
             client.DefaultRequestHeaders.Add("User-Agent", "Tanban");
             client.DefaultRequestHeaders.Accept.Add(
@@ -38,7 +40,7 @@ namespace Helper
         }
         public async Task request_GitHub(string url)
         {
-            url = "/repos/Zanark/HackCal/projects";
+            url = "/users/Zanark/repos";
 
             try
             {
@@ -49,7 +51,7 @@ namespace Helper
                 Console.WriteLine(resp + "\n------------------ \n");
                 Console.ResetColor();
 
-                parse_JSON(resp);
+                //parse_JSON(resp);
             }
             catch (HttpRequestException e)
             {
@@ -63,7 +65,7 @@ namespace Helper
         private void parse_JSON(string inputJSON)
         {
             var projects = JsonConvert.DeserializeObject<List<Project>>(inputJSON);
-            ConsoleUI output = new ConsoleUI(projects.First());
+            //ConsoleUI output = new ConsoleUI(projects.First());
         }
 
     }
