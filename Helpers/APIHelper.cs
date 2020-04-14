@@ -38,20 +38,26 @@ namespace Helper
 
             Console.WriteLine(result + "\n\n");
         }
-        public async Task request_GitHub(string url)
+        public async Task<string> request_GitHub(string url)
         {
-            url = "/users/Zanark/repos";
-
+            
             try
             {
+                Console.WriteLine("In Try");
+                Console.WriteLine(url);
+
                 HttpResponseMessage response = await client.GetAsync(url);
                 response.EnsureSuccessStatusCode();
-                var resp = await response.Content.ReadAsStringAsync();
-                Console.ForegroundColor = ConsoleColor.DarkGreen; 
-                Console.WriteLine(resp + "\n------------------ \n");
-                Console.ResetColor();
+                Console.WriteLine("Success!");
 
-                //parse_JSON(resp);
+                var resp = await response.Content.ReadAsStringAsync();
+                
+                Console.ForegroundColor = ConsoleColor.DarkGreen; 
+                Console.WriteLine(resp.Substring(0,10) + "\n------------------ \n");
+                Console.WriteLine(url);
+                Console.ResetColor();
+                
+                return resp;
             }
             catch (HttpRequestException e)
             {
@@ -59,7 +65,9 @@ namespace Helper
                 HttpResponseMessage response = await client.GetAsync(url);
                 Console.WriteLine("\nException Caught!");
                 Console.WriteLine("Message :{0} ", e.Message);
+                return null;
             }
+            
         }
 
         private void parse_JSON(string inputJSON)

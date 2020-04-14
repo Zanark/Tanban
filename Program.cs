@@ -7,11 +7,10 @@ namespace Tanban
     class Program
     {
         static async Task Main(string[] args)
-        {
-
-            APIHelper apihelper = new APIHelper();
-            await apihelper.request_GitHub("placeholder");
-
+        {            
+            
+            ConsoleUI console = new ConsoleUI("Zanark");
+            await console.ListRepositories();
 
         }
     }

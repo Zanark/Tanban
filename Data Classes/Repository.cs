@@ -12,6 +12,11 @@ namespace DataClass
 
         public bool has_projects { get; set; }
 
+        public override string ToString()
+        {
+            return $"{full_name}";
+        }
+
     }
 
 }
