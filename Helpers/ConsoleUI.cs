@@ -18,14 +18,16 @@ namespace Helper
         {
             var url = "/users/" + this.user + "/repos";
             
-            Console.WriteLine("Calling APIHelper.request_GitHub(url) ");
+            // Console.WriteLine("Calling APIHelper.request_GitHub(url) ");
             APIHelper apihelper = new APIHelper();
             string response = await apihelper.request_GitHub(url);
 
-            Console.WriteLine("Calling DeserializeJSON.ParseRepositoryJSONResponse(response) ");
+            // Console.WriteLine("Calling DeserializeJSON.ParseRepositoryJSONResponse(response) ");
             var repositories = DeserializeJSON.ParseRepositoryJSONResponse(response);
             
             Console.WriteLine("Repositories under user: "+ user);
+            var count = repositories.Count;
+            Console.WriteLine(count);
             repositories.ForEach(Console.WriteLine);
 
         }

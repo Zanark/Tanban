@@ -38,30 +38,28 @@ namespace Helper
 
             Console.WriteLine(result + "\n\n");
         }
+
         public async Task<string> request_GitHub(string url)
         {
             
             try
             {
-                Console.WriteLine("In Try");
-                Console.WriteLine(url);
+                Console.WriteLine("Sending Requests to GitHub servers.....");
 
                 HttpResponseMessage response = await client.GetAsync(url);
                 response.EnsureSuccessStatusCode();
-                Console.WriteLine("Success!");
-
+        
                 var resp = await response.Content.ReadAsStringAsync();
-                
-                Console.ForegroundColor = ConsoleColor.DarkGreen; 
-                Console.WriteLine(resp.Substring(0,10) + "\n------------------ \n");
-                Console.WriteLine(url);
+    
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("SUCCESS!!"); 
                 Console.ResetColor();
                 
                 return resp;
             }
             catch (HttpRequestException e)
             {
-                Console.WriteLine("Inside catch");
+                // Console.WriteLine("Inside catch");
                 HttpResponseMessage response = await client.GetAsync(url);
                 Console.WriteLine("\nException Caught!");
                 Console.WriteLine("Message :{0} ", e.Message);
