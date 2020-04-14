@@ -63,7 +63,7 @@ namespace Helper
         private void parse_JSON(string inputJSON)
         {
             var projects = JsonConvert.DeserializeObject<List<Project>>(inputJSON);
-            Console.WriteLine(projects.First().id);
+            ConsoleUI output = new ConsoleUI(projects.First());
         }
 
     }
