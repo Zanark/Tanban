@@ -8,7 +8,7 @@ namespace Tanban
     {
         static async Task Main(string[] args)
         {
-        
+
             APIHelper apihelper = new APIHelper();
             await apihelper.request_GitHub("placeholder");
 

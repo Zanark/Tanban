@@ -7,14 +7,16 @@ using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DotNetEnv;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace Helper
 {
 
     public class APIHelper
-    {        
+    {
         static readonly HttpClient client = new HttpClient();
-        
+
         public APIHelper()
         {
             client.BaseAddress = new Uri("https://api.github.com");
@@ -35,26 +37,34 @@ namespace Helper
             Console.WriteLine(result + "\n\n");
         }
         public async Task request_GitHub(string url)
-        {            
-            url = "/repos/Zanark/HackCal/projects";            
-          
-            try	
+        {
+            url = "/repos/Zanark/HackCal/projects";
+
+            try
             {
                 HttpResponseMessage response = await client.GetAsync(url);
                 response.EnsureSuccessStatusCode();
                 var resp = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(resp);
-            }  
-            catch(HttpRequestException e)
+                Console.ForegroundColor = ConsoleColor.DarkGreen; 
+                Console.WriteLine(resp + "\n------------------ \n");
+                Console.ResetColor();
+
+                parse_JSON(resp);
+            }
+            catch (HttpRequestException e)
             {
                 Console.WriteLine("Inside catch");
                 HttpResponseMessage response = await client.GetAsync(url);
-                Console.WriteLine("\nException Caught!");	
-                Console.WriteLine("Message :{0} ",e.Message);
+                Console.WriteLine("\nException Caught!");
+                Console.WriteLine("Message :{0} ", e.Message);
             }
         }
-        
 
+        private void parse_JSON(string inputJSON)
+        {
+            var projects = JsonConvert.DeserializeObject<List<Project>>(inputJSON);
+            Console.WriteLine(projects.First().id);
+        }
 
     }
 
