@@ -8,15 +8,15 @@ namespace Helper
     class ConsoleUI
     {
         
-        private string user;
+        protected string User;
         public ConsoleUI(string user)
         {
-            this.user = user;            
+            this.User = user;
         }
 
         public async Task ListRepositories()
         {
-            var url = "/users/" + this.user + "/repos";
+            var url = "/users/" + this.User + "/repos" + "?sort=updated";
             
             // Console.WriteLine("Calling APIHelper.request_GitHub(url) ");
             APIHelper apihelper = new APIHelper();
@@ -25,7 +25,7 @@ namespace Helper
             // Console.WriteLine("Calling DeserializeJSON.ParseRepositoryJSONResponse(response) ");
             var repositories = DeserializeJSON.ParseRepositoryJSONResponse(response);
             
-            Console.WriteLine("Repositories under user: "+ user);
+            Console.WriteLine("Repositories under user: "+ User);
             var count = repositories.Count;
             Console.WriteLine(count);
             repositories.ForEach(Console.WriteLine);
