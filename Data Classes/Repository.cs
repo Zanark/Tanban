@@ -14,7 +14,7 @@ namespace DataClass
 
         public override string ToString()
         {
-            return $"{full_name} {private_}";
+            return $"{full_name}\n";
         }
 
     }

@@ -50,7 +50,7 @@ namespace Helper
                 var resp = await response.Content.ReadAsStringAsync();
     
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine("SUCCESS!!"); 
+                Console.WriteLine("\nSUCCESS!!\n"); 
                 Console.ResetColor();
                 
                 return resp;

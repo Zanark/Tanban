@@ -10,5 +10,10 @@ namespace DataClass
 
         public string body { get; set; }
 
+        public override string ToString()
+        {
+            return $"{name}\n";
+        }
+
     }
 }
